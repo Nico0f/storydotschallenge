@@ -8,7 +8,7 @@ import CreateProduct from "./createform"
 export default function AdminPanel({ children }: any) {
 
     const [products, setProducts] = useState([])
-    const [length, setLenght] = useState<number>()
+    const [length, setLenght] = useState<number>(0)
     const [pagination, setPagination] = useState<number>(1)
     const [ showAdmin, setShowAdmin ] = useState<boolean>(false)
 
