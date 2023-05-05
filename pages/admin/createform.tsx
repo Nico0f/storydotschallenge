@@ -148,7 +148,8 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
 
 
 
-    function handleAddressChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleAddressChange(event: any): any {
+        //@ts-ignore
         const { name, value } = event.target
         setInfo((prevState) => ({ ...prevState, [name]: value }))
     }
@@ -212,7 +213,6 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                                 Published
                             </label>
                             <select
-                                type="text"
                                 id="style"
                                 name='style'
                                 className=
@@ -267,7 +267,6 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                             </label>
 
                             <textarea
-                                type="text"
                                 id="description"
                                 name='description'
                                 className=
@@ -297,7 +296,6 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                             </label>
 
                             <select
-                                type="text"
                                 id="style"
                                 name='style'
                                 className=
@@ -320,7 +318,6 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                             </label>
 
                             <select
-                                type="text"
                                 id="category"
                                 name='category'
                                 className=
@@ -337,7 +334,7 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                             </select>
                         </div>
                         <div className="col-span-6">
-                            {(errors.name || errors.lastName || errors.description || errors.address || errors.city || errors.country || errors.state || errors.postalCode || errors.phone)
+                            {(errors.name || errors.lastName || errors.description  || errors.city || errors.country || errors.state || errors.postalCode || errors.phone)
                                 ?
                                 <button
                                     className="block w-full rounded-md bg-gray-500 p-2.5 text-sm text-white transition hover:shadow-lg"
@@ -348,7 +345,7 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                                 :
                                 <button
                                     className="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
-                                    onClick={console.log('arreglar')}
+                                    onClick={() => console.log('arreglar')}
                                 >
                                     Proceed to Payment
                                 </button>
