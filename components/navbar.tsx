@@ -143,12 +143,16 @@ export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (localStorage.getItem('first_name')) {
+    const first_name = localStorage.getItem('first_name')
+    const last_name = localStorage.getItem('last_name')
+    const avatar = localStorage.getItem('avatar')
+    const email = localStorage.getItem('email')
+    if (first_name && last_name && avatar && email) {
       setUserInfo({
-        first_name: localStorage.getItem('first_name'),
-        last_name: localStorage.getItem('last_name'),
-        avatar: localStorage.getItem('avatar'),
-        email: localStorage.getItem('email')
+        first_name,
+        last_name,
+        avatar,
+        email
       })
     }
   }, [])
