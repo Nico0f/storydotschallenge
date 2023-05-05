@@ -3,7 +3,9 @@ import type { AppProps } from 'next/app'
 import Layout from './layout'
 
 export default function App({ Component, pageProps }: AppProps) {
+  //@ts-ignore
   if (Component.getLayout) {
+  //@ts-ignore
     return Component.getLayout(
           <Component {...pageProps} />
         )
