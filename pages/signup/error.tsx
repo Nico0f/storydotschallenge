@@ -3,7 +3,7 @@ import { Fragment } from "react"
 
 export default function ErrorSignUp({ error, setError }: { error: boolean, setError: Function }) {
     return (
-    <Transition appear show={error} as={Fragment}>
+    <Transition appear show={true} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={() => setError(false)}>
           <Transition.Child
             as={Fragment}

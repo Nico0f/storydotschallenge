@@ -410,8 +410,17 @@ export default function Signup() {
               </div>
             </div>
         }
-        <SuccessSignUp logIn={logIn} setLogIn={setLogIn} />
-        <ErrorSignUp error={error} setError={setError} />
+        {
+          error
+          ?
+          <ErrorSignUp error={error} setError={setError} />
+          :
+          logIn
+          ?
+          <SuccessSignUp logIn={logIn} setLogIn={setLogIn} />
+          :
+          null
+        }
       </section>
     )
   }

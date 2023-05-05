@@ -7,7 +7,7 @@ export default function SuccessSignUp({ logIn, setLogIn }: { logIn: boolean, set
     const router = useRouter()
 
     return (
-        <Transition appear show={logIn} as={Fragment}>
+        <Transition appear show={true} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={() => setLogIn(false)}>
                 <Transition.Child
                     as={Fragment}
