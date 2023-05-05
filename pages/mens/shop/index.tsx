@@ -1,5 +1,5 @@
-import DisplayMen from "@/components/displaymen";
 import ShopLayout from "./layout";
+import DisplayProducts from "@/components/displayproducts";
 
 export default function ShopMen({data, pagination, length}: any) {
 
@@ -17,36 +17,13 @@ export default function ShopMen({data, pagination, length}: any) {
             { value: 'mens_sweaters', label: 'Sweaters', checked: false },
             { value: 'mens_outerwear', label: 'Outerwear', checked: false },
           ],
-        },
-        // {
-        //   id: 'category',
-        //   name: 'Category',
-        //   options: [
-        //     { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-        //     { value: 'sale', label: 'Sale', checked: false },
-        //     { value: 'travel', label: 'Travel', checked: true },
-        //     { value: 'organization', label: 'Organization', checked: false },
-        //     { value: 'accessories', label: 'Accessories', checked: false },
-        //   ],
-        // },
-        // {
-        //   id: 'size',
-        //   name: 'Size',
-        //   options: [
-        //     { value: '2l', label: '2L', checked: false },
-        //     { value: '6l', label: '6L', checked: false },
-        //     { value: '12l', label: '12L', checked: false },
-        //     { value: '18l', label: '18L', checked: false },
-        //     { value: '20l', label: '20L', checked: false },
-        //     { value: '40l', label: '40L', checked: true },
-        //   ],
-        // },
+        }
       ]
 
 
     return(
         <ShopLayout filters={filters} title={'title'} type={'mens'} staticPage={true} length={length}>
-            <DisplayMen data={data} pagination={pagination} type={'mens'} length={length}/>
+            <DisplayProducts data={data} pagination={pagination} type={'mens'} length={length}/>
         </ShopLayout>
     )
 }

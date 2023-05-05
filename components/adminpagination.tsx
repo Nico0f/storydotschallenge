@@ -1,6 +1,6 @@
 import { JSXElementConstructor, ReactElement } from "react"
 
-export default function AdminPagination({ length, pagination, setPagination }: any) {
+export default function AdminPagination({ length, pagination, setPagination }: {length: number, pagination: number, setPagination: Function}) {
 
 
 

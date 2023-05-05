@@ -3,6 +3,7 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'
 import LoginModal from './loginmodal'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const navigation = {
 
@@ -30,38 +31,29 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: 'Tops', href: 'womens/shop/1?category=womens_tops' },
+            { name: 'Dresses', href: 'womens/shop/1?category=womens_dresses' },
+            { name: 'Sweaters', href: 'womens/shop/1?category=womens_sweaters' },
+            { name: 'Outerwear', href: 'womens/shop/1?category=womens_outerwear' },
+            { name: 'Browse All', href: 'womens/shop' },
           ],
         },
         {
-          id: 'accessories',
-          name: 'Accessories',
+          id: 'bottoms',
+          name: 'Bottoms',
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
+            { name: 'Pants', href: 'womens/shop/1?category=womens_pants' },
+            { name: 'Shorts & Skirts', href: 'womens/shop/1?category=womens_shortsandskirts' },
+            { name: 'Jeans', href: 'womens/shop/1?category=womens_jeans' },
           ],
         },
         {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: 'Lotte', href: '#' },
+            { name: 'Fit', href: '#' },
+            { name: 'Globals', href: '#' }
           ],
         },
       ],
@@ -89,31 +81,30 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Browse All', href: '#' },
-            { name: 'Shirts', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'Polos', href: '#' },
-            { name: 'Outerwear', href: '#' },
+            { name: 'Browse All', href: 'mens/shop' },
+            { name: 'Shirts', href: 'mens/shop/1?category=mens_shirts' },
+            { name: 'T-Shirts', href: 'mens/shop/1?category=mens_tees' },
+            { name: 'Sweaters', href: 'mens/shop/1?category=mens_sweaters' },
+            { name: 'Polos', href: 'mens/shop/1?category=mens_polos' },
+            { name: 'Outerwear', href: 'mens/shop/1?category=mens_outerwear' },
           ],
         },
         {
           id: 'bottoms',
           name: 'Bottoms',
           items: [
-            { name: 'Pants', href: '#' },
-            { name: 'Shorts', href: '#' },
-            { name: 'Jeans', href: '#' },
+            { name: 'Pants', href: 'mens/shop/1?category=mens_pants' },
+            { name: 'Shorts', href: 'mens/shop/1?category=mens_shorts' },
+            { name: 'Jeans', href: 'mens/shop/1?category=mens_jeans' },
           ],
         },
         {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
+            { name: 'Lotte', href: '#' },
+            { name: 'Fit', href: '#' },
+            { name: 'Globals', href: '#' }
           ],
         },
       ],
@@ -133,6 +124,8 @@ export default function Navbar(): JSX.Element {
 
   const [modalOpen, setModalOpen] = useState(false)
 
+  const [ loginStatus, setLoginStatus ] = useState(false)
+
   const [userInfo, setUserInfo] = useState({
     first_name: '',
     last_name: '',
@@ -141,6 +134,21 @@ export default function Navbar(): JSX.Element {
   })
 
   const [open, setOpen] = useState(false)
+
+  const router = useRouter()
+
+  function signOut() {
+    localStorage.removeItem('first_name')
+    localStorage.removeItem('last_name')
+    localStorage.removeItem('avatar')
+    localStorage.removeItem('email')
+    localStorage.removeItem('token')
+    setLoginStatus(false)
+  }
+
+  useEffect(() => {
+
+  }, [modalOpen])
 
   useEffect(() => {
     const first_name = localStorage.getItem('first_name')
@@ -154,6 +162,7 @@ export default function Navbar(): JSX.Element {
         avatar,
         email
       })
+      setLoginStatus(true)
     }
   }, [])
 
@@ -303,8 +312,8 @@ export default function Navbar(): JSX.Element {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="#">
-                  <span className="sr-only">Your Company</span>
+                <Link href="/">
+                  <span className="sr-only">StoryDots</span>
                   <img
                     className="hidden md:flex lg:flex h-8 w-auto"
                     src="https://res.cloudinary.com/dgcsnhguo/image/upload/v1683231773/storydots/logo_vsgyyw.png"
@@ -315,7 +324,7 @@ export default function Navbar(): JSX.Element {
                     src="https://res.cloudinary.com/dgcsnhguo/image/upload/v1683231773/storydots/logo-m_jtgcup.png"
                     alt=""
                   />
-                </a>
+                </Link>
               </div>
 
               {/* Flyout menus */}
@@ -439,84 +448,51 @@ export default function Navbar(): JSX.Element {
                   </a>
                 </div> */}
                 {
-                  userInfo.avatar.length > 0
+                  loginStatus
                     ?
-                    <div>
-                      <div className="flex avatar items-center border-y">
-                        <div className="w-8 rounded-full my-2 mx-1">
-                          {
-                            userInfo.avatar
-                              ?
-                              <img referrerPolicy='no-referrer' src={`${userInfo.avatar}`} alt='avatar-img' />
-                              :
-                              null
-                          }
+                    <div className="dropdown bg-gray-200 dropdown-bottom dropdown-end border rounded-l-xl rounded-r-3xl">
+                    <label tabIndex={0} className="">
+                        <div className="avatar items-center hover:cursor-pointer">
+                            <span className='font-semibold mx-2'>{`${userInfo.first_name} ${userInfo.last_name}`}</span>
+                            <div className="w-10 rounded-full">
+                                {
+                                    userInfo.avatar
+                                        ?
+                                        <img width={40} height={40} referrerPolicy='no-referrer' src={`${userInfo.avatar}`} alt='avatar-img' />
+                                        :
+                                        null
+                                }
+                            </div>
                         </div>
-                        <span className='font-semibold ml-2'>{`${userInfo.first_name} ${userInfo.last_name}`}</span>
-                      </div>
-                      {/* <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-                        <details className="group [&_summary::-webkit-details-marker]:hidden">
-                          <summary
-                            className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            <span className="text-sm font-medium"> Your Profile </span>
-
-                            <span className="shrink-0 transition duration-300 group-open:-rotate-180">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"
-                                />
-                              </svg>
-                            </span>
-                          </summary>
-
-                          <nav aria-label="Users Nav" className="mt-2 flex flex-col space-y-1 px-4">
+                    </label>
+                    <div tabIndex={0} className="dropdown-content menu absolute right-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg">
+                        <div className="p-2">
                             <Link
-                              href=""
-                              className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                href="/admin"
+                                className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                             >
-                              Banned Users
+                                Admin panel
                             </Link>
+                        </div>
 
-                            <Link
-                              href=""
-                              className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        <div className="p-2">
+                            <button
+                                onClick={signOut}
+                                className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50"
+
                             >
-                              Calendar
-                            </Link>
-                          </nav>
-                        </details>
-                        <Link
-                          href=""
-                          className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-                        >
-                          Wishlist
-                        </Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                                </svg>
 
 
-                        <Link
-                          href=""
-                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          Orders
-                        </Link>
-
-                        <Link
-                          href=""
-                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          Sign Out
-                        </Link>
-
-                      </nav> */}
+                                Sign out
+                            </button>
+                        </div>
                     </div>
+                    {/* </ul> */}
+
+                </div>
                     :
                     <div className="hidden lg:ml-5 lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                       <span onClick={() => setModalOpen(true)} className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -533,7 +509,7 @@ export default function Navbar(): JSX.Element {
           </div>
         </nav>
       </header>
-      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} setLoginStatus={setLoginStatus} setUserInfo={setUserInfo}/>
     </div>
   )
 }

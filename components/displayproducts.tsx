@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Card from "./card"
 import Pagination from "./pagination"
-export default function DisplayMen({ data, category, type, length, pagination }: any) {
+export default function DisplayProducts({ data, category, type, length, pagination }: any) {
     return (
         <section>
             <div className="flex">

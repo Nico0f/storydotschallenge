@@ -7,16 +7,13 @@ import Link from 'next/link'
 
 
 const sortOptions = [
-  { name: 'Price: Low to High', value: 'priceAs', href: '/asd', current: false },
-  { name: 'Price: High to Low', value: 'priceDe', href: '/asd', current: false },
+  { name: 'Price: Low to High', value: 'priceAs', href: '/', current: false },
+  { name: 'Price: High to Low', value: 'priceDe', href: '/', current: false },
 ]
 
 const subCategories = [
-  { name: 'New Arrivals', href: '/new-arrivals' },
   { name: 'Womens', href: '/womens/shop' },
-  { name: 'Mens', href: '/mens/shop' },
-  { name: 'Best Sellers', href: '' },
-  { name: 'Kids', href: '/kids/shop' },
+  { name: 'Mens', href: '/mens/shop' }
 ]
 
 function classNames(...classes: any) {

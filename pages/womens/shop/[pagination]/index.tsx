@@ -1,5 +1,5 @@
-import ShopLayout from "../layout";
 import DisplayProducts from "@/components/displayproducts";
+import ShopLayout from "@/pages/mens/shop/layout";
 
 export default function ShopMen({ data, pagination, category, length }: any) {
 
@@ -8,22 +8,21 @@ export default function ShopMen({ data, pagination, category, length }: any) {
           id: 'category',
           name: 'Category',
           options: [
-            { value: 'mens_shirts', label: 'Shirts', checked: false },
-            { value: 'mens_jeans', label: 'Jeans', checked: false },
-            { value: 'mens_polos', label: 'Polos', checked: false },
-            { value: 'mens_tees', label: 'T-Shirts', checked: false },
-            { value: 'mens_pants', label: 'Pants', checked: false },
-            { value: 'mens_shorts', label: 'Shorts', checked: false },
-            { value: 'mens_sweaters', label: 'Sweaters', checked: false },
-            { value: 'mens_outerwear', label: 'Outerwear', checked: false },
+            { value: 'womens_dresses', label: 'Dresses', checked: false },
+            { value: 'womens_jeans', label: 'Jeans', checked: false },
+            { value: 'womens_pants', label: 'Pants', checked: false },
+            { value: 'womens_shortsandskirts', label: 'Shorts & Skirts', checked: false },
+            { value: 'womens_sweaters', label: 'Sweaters', checked: false },
+            { value: 'womens_tops', label: 'Tops', checked: false },
+            { value: 'womens_outerwear', label: 'Outerwear', checked: false },
           ],
         }
       ]
 
 
     return(
-        <ShopLayout filters={filters} title={'title'} type={'mens'} category={category} length={length}>
-            <DisplayProducts data={data} pagination={pagination} category={category} type={'mens'} length={length}/>
+        <ShopLayout filters={filters} title={'title'} type={'womens'} category={category} length={length}>
+            <DisplayProducts data={data} pagination={pagination} category={category} type={'womens'} length={length}/>
         </ShopLayout>
     )
 }
@@ -35,13 +34,13 @@ export async function getServerSideProps({ query }: any) {
     const response =
     category && order
     ?
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=men&offset=${offset}&limit=12&order=${order}&category=${category}`)
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&order=${order}&category=${category}`)
     :
     category
     ?
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=men&offset=${offset}&limit=12&category=${category}`)
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&category=${category}`)
     :
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=men&offset=${offset}&limit=12&order=${order}`)
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&order=${order}`)
     
     const data = await response.json()
     

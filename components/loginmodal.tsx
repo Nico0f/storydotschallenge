@@ -2,15 +2,18 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useState, useRef, Fragment, useEffect, ChangeEvent } from "react";
 import Link from "next/link";
 import ErrorLogin from "./errorlogin";
+import { useRouter } from "next/router";
 
 
 
 
 
-export default function LoginModal({ modalOpen, setModalOpen }: any): JSX.Element {
+export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, setUserInfo }: { modalOpen: boolean, setModalOpen: Function, setLoginStatus: Function, setUserInfo: Function }): JSX.Element {
 
   const [errorLogin, setErrorLogin] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const router = useRouter()
 
 
   const [loginData, setLoginData] = useState({
@@ -76,9 +79,18 @@ export default function LoginModal({ modalOpen, setModalOpen }: any): JSX.Elemen
     console.log(data)
     if (data.message === "Success") {
       localStorage.setItem('token', data.token);
+      localStorage.setItem('email', data.email);
       localStorage.setItem('avatar', data.avatar);
       localStorage.setItem('first_name', data.first_name);
       localStorage.setItem('last_name', data.last_name);
+      setModalOpen(false)
+      setUserInfo({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        avatar: data.avatar,
+        email: data.email
+      })
+      setLoginStatus(true)
     } else {
       setErrorMessage(data.message)
       setErrorLogin(true)

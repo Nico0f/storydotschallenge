@@ -10,6 +10,9 @@ export default function AdminPanel({ children }: any) {
     const [products, setProducts] = useState([])
     const [length, setLenght] = useState<number>()
     const [pagination, setPagination] = useState<number>(1)
+    const [ showAdmin, setShowAdmin ] = useState<boolean>(false)
+
+    const router = useRouter()
 
     const [productList, setProductList] = useState<string[]>([])
 
@@ -78,10 +81,21 @@ export default function AdminPanel({ children }: any) {
     }
 
     useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            setShowAdmin(true)
+        } else {
+            router.push('/')
+        }
+    }, [])
+
+    useEffect(() => {
         getProducts()
     }, [pagination])
 
     return (
+        showAdmin
+        ?
         <>
             <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:pl-64 dark:bg-gray-800 dark:border-gray-700">
                 <nav className="flex basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8" aria-label="Global">
@@ -284,5 +298,7 @@ export default function AdminPanel({ children }: any) {
                 }
             </div>
         </>
+        :
+        <p>Loading ...</p>
     )
 }
