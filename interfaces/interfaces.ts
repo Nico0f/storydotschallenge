@@ -18,7 +18,7 @@ export interface ProductDetails {
     description: string;
     image_url: string;
     price: number;
-    color: ColorDetails[];
+    color: ColorCards[];
 }
 
 export interface Filters {

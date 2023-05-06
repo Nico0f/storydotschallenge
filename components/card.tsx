@@ -4,7 +4,7 @@ import Image from "next/image"
 import { ColorCards, ColorDetails } from "@/interfaces/interfaces"
 
 export default function Card({ name, price, colors, id }: {name: string, price: number, colors: ColorCards[], id: string}): JSX.Element {
-
+    console.log(colors[0])
     const [color, setColor] = useState(colors[0])
 
     function changeColor(colorName: string) {

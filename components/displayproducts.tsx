@@ -3,6 +3,7 @@ import Card from "./card"
 import Pagination from "./pagination"
 import { ProductDetails } from "@/interfaces/interfaces"
 export default function DisplayProducts({ data, category, type, length, pagination, title, order }: { data: ProductDetails[], category: string[] | null, type: string, length: number, pagination: number, title: string, order: string | null}) {
+
     return (
         <section>
             <div>
