@@ -54,14 +54,34 @@ export default function Detail({ product }: { product: any }) {
                                 </div>
                             </div>
                             <p className='mt-4 font-serif font-extralight underline'>Overview:</p>
-                            <div
+                            {/* <div
                                 className="overflow-ellipsis overflow-hidden line-clamp-3"
 
                             >
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </div>
-                            <a href='#overview' className='underline text-sm'>Read more...</a>
-                            <h3>Colors</h3>
+                            {product.description}
+                            </div> */}
+                            <details
+                                className="group relative mt-2 [&_summary::-webkit-details-marker]:hidden text-left"
+                            >
+                                <summary className="block">
+                                    <div>
+                                        <div className="prose max-w-none group-open:hidden text-ellipsis overflow-hidden line-clamp-3">
+                                            {product.description}
+                                        </div>
+
+                                        <span
+                                            className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0"
+                                        >
+                                            Read More
+                                        </span>
+                                    </div>
+                                </summary>
+
+                                <div className="pb-6 prose max-w-none" >
+                                    {product.description}
+                                </div>
+                            </details>
+                            <h3 className='my-3 text-xl'>Colors</h3>
                             <div className='flex flex-wrap items-center'>
                                 {
                                     color.map((element: any) => (
@@ -76,7 +96,7 @@ export default function Detail({ product }: { product: any }) {
                                 }
                             </div>
                             <div>
-                                <h3>Size</h3>
+                                <h3 className='my-3 text-xl'>Size</h3>
                                 <div className='flex gap-4'>
                                     <div onClick={() => setSize('xs')} className={size === 'xs' ? 'flex h-12 w-12 items-center justify-center border bg-gray-500 text-stone-100 border-black' : 'flex h-12 w-12 items-center justify-center border hover:border-gray-800 hover:bg-slate-300 hover:cursor-pointer'}>
                                         <div className='text-xl font-light'>xs</div>

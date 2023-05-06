@@ -7,39 +7,34 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
     const [info, setInfo] = useState({
         name: '',
         price: '',
-        lastName: '',
         description: '',
         image_url: '',
-        detail: '',
-        city: '',
-        country: '',
-        state: '',
-        postalCode: '',
-        phone: '',
+        published: '',
+        style: '',
+        category: '',
+        brand: ''
     })
 
     const [errors, setErrors] = useState({
         name: true,
-        lastName: true,
+        price: true,
         description: true,
         image_url: true,
-        city: true,
-        country: true,
-        state: true,
-        postalCode: true,
-        phone: true,
+        published: true,
+        style: true,
+        category: true,
+        brand: true
     })
 
     const [formState, setFormState] = useState({
         name: false,
-        lastName: false,
+        price: false,
         description: false,
         image_url: false,
-        city: false,
-        country: false,
-        state: false,
-        postalCode: false,
-        phone: false,
+        published: false,
+        style: false,
+        category: false,
+        brand: false
     })
 
 
@@ -49,32 +44,26 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
         if (info.name.length === 0) {
             setFormState((prevState) => ({ ...prevState, name: true }))
         }
-        if (info.lastName.length === 0) {
-            setFormState((prevState) => ({ ...prevState, lastName: true }))
-        }
         if (info.description.length === 0) {
             setFormState((prevState) => ({ ...prevState, description: true }))
         }
         if (info.image_url.length === 0) {
             setFormState((prevState) => ({ ...prevState, image_url: true }))
         }
-        if (info.detail.length === 0) {
-            setFormState((prevState) => ({ ...prevState, detail: true }))
+        if (info.published.length === 0) {
+            setFormState((prevState) => ({ ...prevState, published: true }))
         }
-        if (info.city.length === 0) {
-            setFormState((prevState) => ({ ...prevState, city: true }))
+        if (Number(info.price) > 0) {
+            setFormState((prevState) => ({ ...prevState, price: true }))
         }
-        if (info.country.length === 0) {
-            setFormState((prevState) => ({ ...prevState, country: true }))
+        if (info.category.length === 0) {
+            setFormState((prevState) => ({ ...prevState, category: true }))
         }
-        if (info.state.length === 0) {
-            setFormState((prevState) => ({ ...prevState, state: true }))
+        if (info.brand.length === 0) {
+            setFormState((prevState) => ({ ...prevState, brand: true }))
         }
-        if (info.postalCode.length === 0) {
-            setFormState((prevState) => ({ ...prevState, postalCode: true }))
-        }
-        if (info.phone.length === 0) {
-            setFormState((prevState) => ({ ...prevState, phone: true }))
+        if (info.style.length === 0) {
+            setFormState((prevState) => ({ ...prevState, style: true }))
         }
     }
 
@@ -85,11 +74,11 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
         } else {
             setErrors((prevState) => ({ ...prevState, name: true }))
         }
-        if (info.lastName.length > 0) {
-            setErrors((prevState) => ({ ...prevState, lastName: false }))
-            setFormState((prevState) => ({ ...prevState, lastName: true }))
+        if (info.published.length > 0) {
+            setErrors((prevState) => ({ ...prevState, published: false }))
+            setFormState((prevState) => ({ ...prevState, published: true }))
         } else {
-            setErrors((prevState) => ({ ...prevState, lastName: true }))
+            setErrors((prevState) => ({ ...prevState, published: true }))
         }
         if (info.description.length > 0) {
             setErrors((prevState) => ({ ...prevState, description: false }))
@@ -103,41 +92,32 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
         } else {
             setErrors((prevState) => ({ ...prevState, image_url: true }))
         }
-        if (info.detail.length > 0) {
-            setErrors((prevState) => ({ ...prevState, detail: false }))
-            setFormState((prevState) => ({ ...prevState, detail: true }))
+        if (Number(info.price) > 0) {
+            console.log('yes')
+            setErrors((prevState) => ({ ...prevState, price: false }))
+            setFormState((prevState) => ({ ...prevState, price: true }))
         } else {
-            setErrors((prevState) => ({ ...prevState, detail: true }))
+            console.log('no')
+
+            setErrors((prevState) => ({ ...prevState, price: true }))
         }
-        if (info.city.length > 0) {
-            setErrors((prevState) => ({ ...prevState, city: false }))
-            setFormState((prevState) => ({ ...prevState, city: true }))
+        if (info.category.length > 0) {
+            setErrors((prevState) => ({ ...prevState, category: false }))
+            setFormState((prevState) => ({ ...prevState, category: true }))
         } else {
-            setErrors((prevState) => ({ ...prevState, city: true }))
+            setErrors((prevState) => ({ ...prevState, category: true }))
         }
-        if (info.country.length > 0) {
-            setErrors((prevState) => ({ ...prevState, country: false }))
-            setFormState((prevState) => ({ ...prevState, country: true }))
+        if (info.brand.length > 0) {
+            setErrors((prevState) => ({ ...prevState, brand: false }))
+            setFormState((prevState) => ({ ...prevState, brand: true }))
         } else {
-            setErrors((prevState) => ({ ...prevState, country: true }))
+            setErrors((prevState) => ({ ...prevState, brand: true }))
         }
-        if (info.state.length > 0) {
-            setErrors((prevState) => ({ ...prevState, state: false }))
-            setFormState((prevState) => ({ ...prevState, state: true }))
+        if (info.style.length > 0) {
+            setErrors((prevState) => ({ ...prevState, style: false }))
+            setFormState((prevState) => ({ ...prevState, style: true }))
         } else {
-            setErrors((prevState) => ({ ...prevState, state: true }))
-        }
-        if (info.postalCode.length > 0) {
-            setErrors((prevState) => ({ ...prevState, postalCode: false }))
-            setFormState((prevState) => ({ ...prevState, postalCode: true }))
-        } else {
-            setErrors((prevState) => ({ ...prevState, postalCode: true }))
-        }
-        if (info.phone.length > 0) {
-            setErrors((prevState) => ({ ...prevState, phone: false }))
-            setFormState((prevState) => ({ ...prevState, phone: true }))
-        } else {
-            setErrors((prevState) => ({ ...prevState, phone: true }))
+            setErrors((prevState) => ({ ...prevState, style: true }))
         }
     }
 
@@ -148,7 +128,7 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
 
 
 
-    function handleAddressChange(event: any): any {
+    function handleInputsChange(event: any): any {
         //@ts-ignore
         const { name, value } = event.target
         setInfo((prevState) => ({ ...prevState, [name]: value }))
@@ -195,7 +175,7 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                                         :
                                         "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             />
                             {
                                 (formState.name && errors.name)
@@ -209,24 +189,25 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                         </div>
 
                         <div className="col-span-3">
-                            <label htmlFor="style" className="block text-xs font-medium text-gray-700">
+                            <label htmlFor="published" className="block text-xs font-medium text-gray-700">
                                 Published
                             </label>
                             <select
-                                id="style"
-                                name='style'
+                                id="published"
+                                name='published'
                                 className=
                                 {
-                                    (formState.description && errors.description)
+                                    (formState.published && errors.published)
                                         ?
                                         "form-control w-full mt-1 border-red-500 focus:border-red-500 focus:ring-transparent rounded-md shadow-sm sm:text-sm"
                                         :
                                         "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             >
-                                <option value='true'>true</option>
-                                <option value='false'>false</option>
+                                <option value=''>Select option...</option>
+                                <option value='true'>True</option>
+                                <option value='false'>False</option>
                             </select>
                         </div>
 
@@ -249,7 +230,7 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                                         :
                                         "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             />
                             {
                                 (formState.image_url && errors.image_url)
@@ -277,7 +258,7 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                                         :
                                         "form-control h-3/4 w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             >
                             </textarea>
                             {
@@ -300,18 +281,17 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                                 name='style'
                                 className=
                                 {
-                                    (formState.description && errors.description)
+                                    (formState.style && errors.style)
                                         ?
                                         "form-control w-full mt-1 border-red-500 focus:border-red-500 focus:ring-transparent rounded-md shadow-sm sm:text-sm"
                                         :
                                         "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             >
+                                <option value=''>Select option...</option>
                                 <option value='women'>Women</option>
                                 <option value='men'>Men</option>
-                                <option value=''>Unisex</option>
-                                <option value=''>Other...</option>
                             </select>
                             <label htmlFor="category" className="block text-xs font-medium text-gray-700">
                                 Category
@@ -322,32 +302,110 @@ export default function CreateProduct({ setShowCreate }: { setShowCreate: Functi
                                 name='category'
                                 className=
                                 {
-                                    (formState.description && errors.description)
+                                    (formState.category && errors.category)
                                         ?
                                         "form-control w-full mt-1 border-red-500 focus:border-red-500 focus:ring-transparent rounded-md shadow-sm sm:text-sm"
                                         :
                                         "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                 }
-                                onChange={handleAddressChange}
+                                onChange={handleInputsChange}
                             >
-                                <option value=''>Categories</option>
+                                <option value=''>Select option...</option>
+                                {
+                                    info.style === 'women'
+                                    ?
+                                    <>
+                                    <option value='womens_sweaters'>Sweaters</option>
+                                    <option value='womens_tops'>Tops & Shirts</option>
+                                    <option value='womens_jeans'>Denim</option>
+                                    <option value='womens_pants'>Pants</option>
+                                    <option value='womens_outerwear'>Outerwear</option>
+                                    <option value='womens_dresses'>Dresses</option>
+                                    <option value='womens_shortsandskirts'>Shorts & Skirts</option>
+                                    </>
+                                    :
+                                    info.style === 'men'
+                                    ?
+                                    <>
+                                    <option value='mens_sweaters'>Sweaters</option>
+                                    <option value='mens_shirts'>Shirts</option>
+                                    <option value='mens_jeans'>Jeans</option>
+                                    <option value='mens_pants'>Pants</option>
+                                    <option value='mens_shorts'>Shorts</option>
+                                    <option value='mens_tees'>T-Shirts</option>
+                                    <option value='mens_polos'>Polos</option>
+                                    <option value='mens_outerwear'>Outerwear</option>
+                                    </>
+                                    :
+                                    <option value=''>Select style first</option>
+
+
+                                }
                             </select>
                         </div>
                         <div className="col-span-6">
-                            {(errors.name || errors.lastName || errors.description  || errors.city || errors.country || errors.state || errors.postalCode || errors.phone)
+                            <div className="grid grid-cols-8 gap-4">
+                            <div className="hidden md:col-span-2 md:flex lg:col-span-2 lg:flex"></div>
+                                <div className="md:col-span-2 lg:col-span-2 col-span-4">
+                                    <label htmlFor="brand" className="block text-xs font-medium text-gray-700">
+                                        Brand
+                                    </label>
+
+                                    <select
+                                        id="brand"
+                                        name='brand'
+                                        className=
+                                        {
+                                            (formState.brand && errors.brand)
+                                                ?
+                                                "form-control w-full mt-1 border-red-500 focus:border-red-500 focus:ring-transparent rounded-md shadow-sm sm:text-sm"
+                                                :
+                                                "form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
+                                        }
+                                        onChange={handleInputsChange}
+                                    >
+                                        <option value=''>Select option...</option>
+                                        <option value='Lotte'>Lotte</option>
+                                        <option value='Fit'>Fit</option>
+                                        <option value='Globals'>Globals</option>
+                                    </select>
+                                </div>
+                                <div className="md:col-span-2 lg:col-span-2 col-span-4">
+                                <label htmlFor="price" className="block text-xs font-medium text-gray-700">
+                                    Price
+                                </label>
+                                <input
+                                    type='number'
+                                    id="price"
+                                    name='price'
+                                    className=
+                                    {
+                                        (formState.price && errors.price)
+                                            ?
+                                            "md:col-span-2 lg:col-span-2 col-span-4 form-control w-full mt-1 border-red-500 focus:border-red-500 focus:ring-transparent rounded-md shadow-sm sm:text-sm"
+                                            :
+                                            "md:col-span-2 lg:col-span-2 col-span-4 form-control w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
+                                    }
+                                    onChange={handleInputsChange}
+                                />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-span-6">
+                            {(errors.name || errors.published || errors.description || errors.image_url || errors.price || errors.category || errors.brand || errors.style)
                                 ?
                                 <button
                                     className="block w-full rounded-md bg-gray-500 p-2.5 text-sm text-white transition hover:shadow-lg"
                                     onClick={validateDisabled}
                                 >
-                                    Proceed to Payment
+                                    Create Product
                                 </button>
                                 :
                                 <button
                                     className="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
                                     onClick={() => console.log('arreglar')}
                                 >
-                                    Proceed to Payment
+                                    Create Product
                                 </button>
                             }
                         </div>
