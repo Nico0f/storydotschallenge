@@ -31,20 +31,20 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: 'womens/shop/1?category=womens_tops' },
-            { name: 'Dresses', href: 'womens/shop/1?category=womens_dresses' },
-            { name: 'Sweaters', href: 'womens/shop/1?category=womens_sweaters' },
-            { name: 'Outerwear', href: 'womens/shop/1?category=womens_outerwear' },
-            { name: 'Browse All', href: 'womens/shop' },
+            { name: 'Tops', href: '/womens/shop/1?category=womens_tops' },
+            { name: 'Dresses', href: '/womens/shop/1?category=womens_dresses' },
+            { name: 'Sweaters', href: '/womens/shop/1?category=womens_sweaters' },
+            { name: 'Outerwear', href: '/womens/shop/1?category=womens_outerwear' },
+            { name: 'Browse All', href: '/womens/shop' },
           ],
         },
         {
           id: 'bottoms',
           name: 'Bottoms',
           items: [
-            { name: 'Pants', href: 'womens/shop/1?category=womens_pants' },
-            { name: 'Shorts & Skirts', href: 'womens/shop/1?category=womens_shortsandskirts' },
-            { name: 'Jeans', href: 'womens/shop/1?category=womens_jeans' },
+            { name: 'Pants', href: '/womens/shop/1?category=womens_pants' },
+            { name: 'Shorts & Skirts', href: '/womens/shop/1?category=womens_shortsandskirts' },
+            { name: 'Jeans', href: '/womens/shop/1?category=womens_jeans' },
           ],
         },
         {
@@ -81,21 +81,21 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Browse All', href: 'mens/shop' },
-            { name: 'Shirts', href: 'mens/shop/1?category=mens_shirts' },
-            { name: 'T-Shirts', href: 'mens/shop/1?category=mens_tees' },
-            { name: 'Sweaters', href: 'mens/shop/1?category=mens_sweaters' },
-            { name: 'Polos', href: 'mens/shop/1?category=mens_polos' },
-            { name: 'Outerwear', href: 'mens/shop/1?category=mens_outerwear' },
+            { name: 'Browse All', href: '/mens/shop' },
+            { name: 'Shirts', href: '/mens/shop/1?category=mens_shirts' },
+            { name: 'T-Shirts', href: '/mens/shop/1?category=mens_tees' },
+            { name: 'Sweaters', href: '/mens/shop/1?category=mens_sweaters' },
+            { name: 'Polos', href: '/mens/shop/1?category=mens_polos' },
+            { name: 'Outerwear', href: '/mens/shop/1?category=mens_outerwear' },
           ],
         },
         {
           id: 'bottoms',
           name: 'Bottoms',
           items: [
-            { name: 'Pants', href: 'mens/shop/1?category=mens_pants' },
-            { name: 'Shorts', href: 'mens/shop/1?category=mens_shorts' },
-            { name: 'Jeans', href: 'mens/shop/1?category=mens_jeans' },
+            { name: 'Pants', href: '/mens/shop/1?category=mens_pants' },
+            { name: 'Shorts', href: '/mens/shop/1?category=mens_shorts' },
+            { name: 'Jeans', href: '/mens/shop/1?category=mens_jeans' },
           ],
         },
         {
@@ -111,8 +111,6 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
   ],
 }
 

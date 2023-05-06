@@ -23,7 +23,7 @@ export default function ShopMen({data, pagination, length}: any) {
 
     return(
         <ShopLayout filters={filters} title={'title'} type={'mens'} staticPage={true} length={length}>
-            <DisplayProducts data={data} pagination={pagination} type={'mens'} length={length}/>
+            <DisplayProducts data={data} title={'All mens'} pagination={pagination} type={'mens'} length={length}/>
         </ShopLayout>
     )
 }

@@ -22,7 +22,7 @@ export default function ShopWoen({ data, pagination, category, length }: any) {
 
     return(
         <ShopLayout filters={filters} title={'title'} type={'womens'} category={category} length={length}>
-            <DisplayProducts data={data} pagination={pagination} category={category} type={'womens'} length={length}/>
+            <DisplayProducts data={data} title={'All womens'} pagination={pagination} category={category} type={'womens'} length={length}/>
         </ShopLayout>
     )
 }
