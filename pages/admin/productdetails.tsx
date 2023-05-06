@@ -29,7 +29,7 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
         published: ''
     })
 
-    async function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    async function handleChange(event: ChangeEvent<any>) {
         const { value, name } = event.target;
         setEditProductInfo((prevState) => ({ ...prevState, [name]: value }))
     }
