@@ -145,7 +145,7 @@ export default function Signup() {
               >
                 <Image
                   alt="books-img"
-                  src="https://res.cloudinary.com/dgcsnhguo/image/upload/v1675660282/BookStore/signup_ubtyhy.png"
+                  src="https://media.everlane.com/image/upload/c_fill,w_1920,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/f53d2c3f_b172"
                   className="absolute inset-0 h-full w-full object-cover"
                   width={900}
                   height={650}
@@ -153,7 +153,7 @@ export default function Signup() {
   
                 <div className="bg-gradient-to-t from-black to-transparent lg:relative lg:block lg:p-12">
                   <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                    Welcome to Book Store
+                    Welcome to Clothes Store
                   </h2>
                   <p className="mt-4 leading-relaxed text-white/90">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
