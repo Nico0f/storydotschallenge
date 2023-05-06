@@ -48,14 +48,14 @@ export default function SuccessSignUp({ logIn, setLogIn }: { logIn: boolean, set
 
                                 <div className="mt-4">
                                     <div className="flex items-center">
-                                        <button
+                                        {/* <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-[#3d5962] px-4 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                         onClick={() => console.log('resolver')}
                                     >
                                         Log-in
-                                    </button>
-                                        <div className="divider divider-horizontal">OR</div>
+                                    </button> */}
+                                        {/* <div className="divider divider-horizontal">OR</div> */}
                                         <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-[#3d5962] px-4 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"

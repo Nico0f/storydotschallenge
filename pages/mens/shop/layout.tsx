@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, Fragment, useState } from 'react'
+import { ChangeEvent, Fragment, ReactNode, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
+import { Filters } from '@/interfaces/interfaces'
 
 
 const sortOptions = [
+  { name: 'none', value: '', href: '/', current: false },
   { name: 'Price: Low to High', value: 'priceAs', href: '/', current: false },
   { name: 'Price: High to Low', value: 'priceDe', href: '/', current: false },
 ]
@@ -20,7 +22,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ShopLayout({ children, title, order, staticPage, filters, category, type, length }: any) {
+export default function ShopLayout({ children, title, order, staticPage, filters, category, type, length }: { children: ReactNode, title: string, order: string | null, staticPage: boolean, filters: Filters[], category: string[] | null, type: string, length: number}): JSX.Element {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const { asPath, basePath } = useRouter()
   const router = useRouter()
@@ -171,7 +173,7 @@ export default function ShopLayout({ children, title, order, staticPage, filters
 
         <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pt-8 pb-6">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title === 'Nonfiction' ? 'Non Fiction' : title === 'Fiction' ? 'Fiction' : title === 'Kids' ? 'Kids' : title === 'Search' ? 'Search' : null}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title}</h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -200,7 +202,7 @@ export default function ShopLayout({ children, title, order, staticPage, filters
                         <Menu.Item key={option.name}>
                           {({ active }) => (
                             <Link
-                              href={staticPage ? `${asPath}/1?order=${option.value}` : asPath.includes('order=') ? asPath.replace(/\/\d+\?order=.{7}/, `/1?order=${option.value}`) : asPath.includes('category=') ? `${asPath}&order=${option.value}` : `${asPath}?order=${option.value}`}
+                              href={staticPage ? `${asPath}/1?order=${option.value}` : option.value === '' ? asPath.includes('?order=') ? asPath.replace(/\?order=.{7}/, '') : asPath.replace(/\&order=.{7}/, '') : asPath.includes('order=') ? asPath.replace(/\/\d+\?order=.{7}/, `/1?order=${option.value}`) : asPath.includes('category=') ? `${asPath}&order=${option.value}` : `${asPath}?order=${option.value}`}
                               className={classNames(
                                 option.value === order ? 'font-medium text-gray-900' : 'text-gray-500',
                                 active ? 'bg-gray-100' : '',
@@ -255,7 +257,7 @@ export default function ShopLayout({ children, title, order, staticPage, filters
                 {
                   filters
                     ?
-                    filters.map((section: any) => (
+                    filters.map((section: Filters) => (
                       <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
                         {({ open }) => (
                           <>
@@ -302,12 +304,8 @@ export default function ShopLayout({ children, title, order, staticPage, filters
                     :
                     null}
               </form>
-
-              {/* Product grid */}
               <div className="lg:col-span-3">
-                {/* Replace with your content */}
                 {children}
-                {/* /End replace */}
               </div>
             </div>
           </section>

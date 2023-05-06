@@ -5,7 +5,7 @@ import ProductDetails from "./productdetails"
 import { useRouter } from 'next/router'
 import CreateProduct from "./createform"
 
-export default function AdminPanel({ children }: any) {
+export default function AdminPanel({ children }: { children: React.ReactNode }) {
 
     const [products, setProducts] = useState([])
     const [length, setLenght] = useState<number>(0)

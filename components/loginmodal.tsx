@@ -3,6 +3,7 @@ import { useState, useRef, Fragment, useEffect, ChangeEvent } from "react";
 import Link from "next/link";
 import ErrorLogin from "./errorlogin";
 import { useRouter } from "next/router";
+import { LoginData } from "@/interfaces/interfaces";
 
 
 
@@ -17,7 +18,7 @@ export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, se
   const { asPath } = useRouter()
 
 
-  const [loginData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: ''
   })
@@ -43,7 +44,7 @@ export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, se
     }
   }
 
-  function validate(loginData: any) {
+  function validate(loginData: LoginData) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (loginData.email.length > 0 && emailRegex.test(loginData.email)) {
       setErrors((prevState) => ({ ...prevState, email: false }))
@@ -108,7 +109,7 @@ export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, se
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
-    setLoginData((prevState: any) => ({ ...prevState, [name]: value }));
+    setLoginData((prevState) => ({ ...prevState, [name]: value }));
   }
 
   useEffect(() => {

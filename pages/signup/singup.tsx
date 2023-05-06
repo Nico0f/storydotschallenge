@@ -1,6 +1,3 @@
-// import { auth } from "@/config/firebase-config"
-// import { AdditionalUserInfo, GoogleAuthProvider, User, UserCredential, getAdditionalUserInfo, onAuthStateChanged, signInWithPopup } from "firebase/auth"
-
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -114,7 +111,6 @@ export default function Signup() {
         body: JSON.stringify(signUpData)
       })
       const data = await res.json()
-      console.log(data)
       if (data.message === 'Success') {
         setLogIn(true)
       } else {

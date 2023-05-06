@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react"
 
-export default function ProductDetails({ productShow, setShowDetails }: any) {
+export default function ProductDetails({ productShow, setShowDetails }: { productShow: string, setShowDetails: Function }): JSX.Element {
 
     const [productDetails, setProductDetails] = useState({
         id: '',

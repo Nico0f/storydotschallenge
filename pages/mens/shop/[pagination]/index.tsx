@@ -1,7 +1,9 @@
+import { ProductDetails } from "@/interfaces/interfaces";
 import ShopLayout from "../layout";
 import DisplayProducts from "@/components/displayproducts";
+import { GetServerSidePropsContext } from "next";
 
-export default function ShopMen({ data, pagination, category, length }: any) {
+export default function ShopMen({ data, pagination, category, length, order }: { data: ProductDetails[], pagination: number, category: string[] | null, length: number, order: string }): JSX.Element {
 
     const filters = [
         {
@@ -22,16 +24,18 @@ export default function ShopMen({ data, pagination, category, length }: any) {
 
 
     return(
-        <ShopLayout filters={filters} title={'title'} type={'mens'} category={category} length={length}>
-            <DisplayProducts data={data} title={'All mens'} pagination={pagination} category={category} type={'mens'} length={length}/>
+        <ShopLayout filters={filters} staticPage={false} title={'Mens clothing'} type={'mens'} category={category} length={length} order={order}>
+            <DisplayProducts data={data} title={'All mens'} pagination={pagination} category={category} type={'mens'} length={length} order={order}/>
         </ShopLayout>
     )
 }
 
 
-export async function getServerSideProps({ query }: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { query } = context
+
     const { pagination, category, order } = query
-    const offset = (12 * ( pagination -1 ))
+    const offset = (12 * ( Number(pagination) -1 ))
     const response =
     category && order
     ?
@@ -53,7 +57,8 @@ export async function getServerSideProps({ query }: any) {
           data,
           length,
           pagination: Number(pagination),
-          category
+          category,
+          order
         },
       }
     } else if (order) {
@@ -62,6 +67,7 @@ export async function getServerSideProps({ query }: any) {
           data,
           length,
           pagination: Number(pagination),
+          order
         },
       }
     } else if (category) {

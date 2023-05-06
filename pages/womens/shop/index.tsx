@@ -1,7 +1,9 @@
 import ShopLayout from "@/pages/mens/shop/layout";
 import DisplayProducts from "@/components/displayproducts";
+import { ProductDetails } from "@/interfaces/interfaces";
+import { GetServerSidePropsContext } from "next";
 
-export default function ShopWoen({ data, pagination, category, length }: any) {
+export default function ShopWomen({ data, pagination, length }: {data: ProductDetails[], pagination: number, category: string[], length: number, order: string | null}): JSX.Element {
 
     const filters = [
         {
@@ -21,64 +23,24 @@ export default function ShopWoen({ data, pagination, category, length }: any) {
 
 
     return(
-        <ShopLayout filters={filters} title={'title'} type={'womens'} category={category} length={length}>
-            <DisplayProducts data={data} title={'All womens'} pagination={pagination} category={category} type={'womens'} length={length}/>
+        <ShopLayout filters={filters} staticPage={true} title={'Womens clothing'} type={'womens'} category={null} length={length} order={null}>
+            <DisplayProducts data={data} title={'All womens'} pagination={pagination} category={null} type={'womens'} length={length} order={null}/>
         </ShopLayout>
     )
 }
 
 
-export async function getServerSideProps({ query }: any) {
-    const { pagination, category, order } = query
-    const offset = (12 * ( pagination -1 ))
-    const response =
-    category && order
-    ?
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&order=${order}&category=${category}`)
-    :
-    category
-    ?
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&category=${category}`)
-    :
-    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&offset=${offset}&limit=12&order=${order}`)
-    
-    const data = await response.json()
-    
-    const length = Object.fromEntries(response.headers.entries()).count
+export async function getStaticProps() {
+  const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `products?style=women&limit=12&offset=0`)
+  const data = await response.json()
 
-    if (order && category) {
-      return {
-        props: {
-          data,
-          length,
-          pagination: Number(pagination),
-          category
-        },
-      }
-    } else if (order) {
-      return {
-        props: {
-          data,
-          length,
-          pagination: Number(pagination),
-        },
-      }
-    } else if (category) {
-      return {
-        props: {
-          data,
-          length,
-          pagination: Number(pagination),
-          category
-        },
-      }
-    } else {
-      return {
-        props: {
-          data,
-          length,
-          pagination: Number(pagination),
-        },
-      }
-    }
+  const length = Object.fromEntries(response.headers.entries()).count
+  return {
+    props: {
+      data,
+      length,
+      pagination: 1
+    },
+    revalidate: 1800,
   }
+}

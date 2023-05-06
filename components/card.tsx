@@ -1,15 +1,17 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { ColorCards, ColorDetails } from "@/interfaces/interfaces"
 
-export default function Card({ name, price, colors, id }: any): JSX.Element {
+export default function Card({ name, price, colors, id }: {name: string, price: number, colors: ColorCards[], id: string}): JSX.Element {
 
     const [color, setColor] = useState(colors[0])
 
     function changeColor(colorName: string) {
-        const color = colors.filter((element: any) => element.color.name === colorName)
+        const color = colors.filter((element: ColorCards) => element.color.name === colorName)
         setColor(color[0])
     }
+
 
     useEffect(() => {
         setColor(colors[0])
@@ -49,9 +51,9 @@ export default function Card({ name, price, colors, id }: any): JSX.Element {
             <h3 className="text-[10px] md:text-[13px] lg:text-[13px] text-gray-700">by brand</h3>
             <div className="grid grid-flow-col auto-cols-max md:flex md:flex-wrap lg:flex lg:flex-wrap overflow-x-scroll items-center">
                 {
-                    colors.map((element: any) => (
+                    colors.map((element: ColorCards) => (
                         <div
-                            key={element.color.name + id}
+                            key={element.color.name + name}
                             className={
                                 color.color.name === element.color.name
                                     ?

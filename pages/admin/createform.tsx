@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useEffect, useState, MouseEvent } from "react"
 
-export default function CreateProduct({ setShowCreate }: any): JSX.Element {
+export default function CreateProduct({ setShowCreate }: { setShowCreate: Function }): JSX.Element {
 
 
     const [info, setInfo] = useState({

@@ -1,7 +1,8 @@
+import { ProductDetails } from "@/interfaces/interfaces";
 import ShopLayout from "./layout";
 import DisplayProducts from "@/components/displayproducts";
 
-export default function ShopMen({data, pagination, length}: any) {
+export default function ShopMen({data, pagination, length}: { data: ProductDetails[], pagination: number, length: number }): JSX.Element {
 
     const filters = [
         {
@@ -22,8 +23,8 @@ export default function ShopMen({data, pagination, length}: any) {
 
 
     return(
-        <ShopLayout filters={filters} title={'title'} type={'mens'} staticPage={true} length={length}>
-            <DisplayProducts data={data} title={'All mens'} pagination={pagination} type={'mens'} length={length}/>
+        <ShopLayout filters={filters} title={'Mens clothing'} type={'mens'} staticPage={true} length={length} order={null} category={null}>
+            <DisplayProducts data={data} title={'All mens'} pagination={pagination} type={'mens'} length={length} category={null} order={null}/>
         </ShopLayout>
     )
 }
