@@ -8,7 +8,7 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
         description: '',
         image_url: '',
         price: '',
-        published: ''
+        published: 'True'
     })
 
     const [productInfo, setProductInfo] = useState({
@@ -16,7 +16,8 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
         name: false,
         description: false,
         image_url: false,
-        price: false
+        price: false,
+        published: false
     })
 
     const [editProductInfo, setEditProductInfo] = useState({
@@ -25,6 +26,7 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
         description: '',
         image_url: '',
         price: '',
+        published: ''
     })
 
     async function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -38,6 +40,27 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
         setProductInfo((prevState) => ({ ...prevState, [name]: false }))
     }
 
+    async function submitHandle(event: any) {
+        event.preventDefault()
+        let info = {}
+    for (let entry of Object.keys(editProductInfo)) {
+      //@ts-ignore
+      if (editProductInfo[entry].length > 0) {
+      //@ts-ignore
+        info = { ...info, [entry]: editProductInfo[entry] }
+      }
+        }
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `admin/products/${productDetails.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(info),
+      headers: 
+        {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    })
+    }
+
 
 
     async function getProduct() {
@@ -49,7 +72,7 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
             description: data.description,
             image_url: data.image_url,
             price: data.price,
-            published: data.published
+            published: data.published ? 'True' : 'False'
         }
         setProductDetails(newProduct)
     }
@@ -89,7 +112,7 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-6 sm:col-span-3">
+                <div className="grid items-center col-span-6 sm:col-span-3">
                     {
                         productInfo.name
                             ?
@@ -178,7 +201,8 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
                     }
                 </div>
 
-                {
+                <div className="col-span-6 sm:col-span-4">
+                    {
                         productInfo.description
                             ?
                             <div>
@@ -191,14 +215,14 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
                                     <span id='description' className="text-[9px] hover:cursor-pointer text-red-500" onClick={cancelInput}> Cancel edit</span>
                                 </label>
 
-                                <input
-                                    type="text"
+                                <textarea
                                     id="description"
                                     className="w-full mt-1 border-gray-200 rounded-md shadow-sm sm:text-sm"
                                     name='description'
                                     value={editProductInfo.description}
                                     onChange={handleChange}
-                                />
+                                >
+                                </textarea>
                             </div>
                             :
                             <div>
@@ -210,17 +234,116 @@ export default function ProductDetails({ productShow, setShowDetails }: any) {
                                     <span className="text-[9px] hover:cursor-pointer text-blue-500" onClick={() => setProductInfo((prevState) => ({ ...prevState, description: true }))}> Edit</span>
                                 </label>
 
-                                <input
-                                    type="text"
+                                <textarea
                                     id="description"
                                     placeholder={productDetails.description}
                                     value={productDetails.description}
                                     disabled
                                     className="w-full mt-1 border-gray-200 text-gray-400 rounded-md shadow-sm sm:text-sm"
-                                />
+                                >
+                                </textarea>
 
                             </div>
                     }
+
+                </div>
+                {
+                    productInfo.published
+                        ?
+                        <div className="col-span-6 sm:col-span-1">
+                            <label
+                                htmlFor="published"
+                                className="block text-xs font-medium text-gray-700"
+                            >
+                                Published •
+                                {/* @ts-ignore */}
+                                <span id='published' className="text-[9px] hover:cursor-pointer text-red-500" onClick={cancelInput}> Cancel edit</span>
+                            </label>
+
+                            <select
+                                id="published"
+                                name='published'
+                                value={editProductInfo.published}
+                                className="select select-bordered w-full"
+                                onChange={handleChange}
+                            >
+                                <option value='true'>True</option>
+                                <option value='false'>False</option>
+                            </select>
+                        </div>
+                        :
+                        <div className="col-span-6 sm:col-span-1">
+                            <label
+                                htmlFor="published"
+                                className="block text-xs font-medium text-gray-700"
+                            >
+                                Published •
+                                <span className="text-[9px] hover:cursor-pointer text-blue-500" onClick={() => setProductInfo((prevState) => ({ ...prevState, published: true }))}> Edit</span>
+                            </label>
+
+                            <input
+                                type='text'
+                                id="published"
+                                value={productDetails.published}
+                                className="select select-bordered w-full"
+                            />
+                        </div>
+
+                }
+                {
+                    productInfo.price
+                        ?
+                        <div className="col-span-6 sm:col-span-1">
+                            <label
+                                htmlFor="price"
+                                className="block text-xs font-medium text-gray-700"
+                            >
+                                Price •
+                                {/* @ts-ignore */}
+                                <span id='price' className="text-[9px] hover:cursor-pointer text-red-500" onClick={cancelInput}> Cancel edit</span>
+                            </label>
+
+                            <input
+                                type='number'
+                                id="price"
+                                name='price'
+                                value={editProductInfo.price}
+                                className="input input-bordered w-full"
+                                onChange={handleChange}
+                            />
+
+                        </div>
+                        :
+                        <div className="col-span-6 sm:col-span-1">
+                            <label
+                                htmlFor="price"
+                                className="block text-xs font-medium text-gray-700"
+                            >
+                                Price •
+                                <span className="text-[9px] hover:cursor-pointer text-blue-500" onClick={() => setProductInfo((prevState) => ({ ...prevState, price: true }))}> Edit</span>
+                            </label>
+
+                            <input
+                                type='number'
+                                id="price"
+                                name='price'
+                                placeholder={productDetails.price}
+                                className="input input-bordered w-full"
+                                disabled
+                            />
+
+                        </div>
+
+                }
+
+                <button
+                    className="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
+                    onClick={submitHandle}
+                >
+                    Change value
+                </button>
+
+
 
             </form>
 

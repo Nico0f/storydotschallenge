@@ -8,12 +8,13 @@ import { useRouter } from "next/router";
 
 
 
-export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, setUserInfo }: { modalOpen: boolean, setModalOpen: Function, setLoginStatus: Function, setUserInfo: Function }): JSX.Element {
+export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, setUserInfo, setAdminStatus }: { modalOpen: boolean, setModalOpen: Function, setLoginStatus: Function, setUserInfo: Function, setAdminStatus: Function }): JSX.Element {
 
   const [errorLogin, setErrorLogin] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const router = useRouter()
+  const { asPath } = useRouter()
 
 
   const [loginData, setLoginData] = useState({
@@ -76,7 +77,6 @@ export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, se
       body: JSON.stringify(loginData)
     })
     let data = await res.json()
-    console.log(data)
     if (data.message === "Success") {
       localStorage.setItem('token', data.token);
       localStorage.setItem('email', data.email);
@@ -91,6 +91,14 @@ export default function LoginModal({ modalOpen, setModalOpen, setLoginStatus, se
         email: data.email
       })
       setLoginStatus(true)
+      if (data.admin) {
+        setAdminStatus(true)
+      } else {
+        setAdminStatus(false)
+      }
+      if (asPath.includes('signup')) {
+        router.push('/')
+      }
     } else {
       setErrorMessage(data.message)
       setErrorLogin(true)

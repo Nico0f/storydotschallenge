@@ -208,7 +208,7 @@ export default function CreateProduct({ setShowCreate }: any): JSX.Element {
                             }
                         </div>
 
-                        <div className="col-span-6 md:col-span-3 lg:col-span-3">
+                        <div className="col-span-3">
                             <label htmlFor="style" className="block text-xs font-medium text-gray-700">
                                 Published
                             </label>

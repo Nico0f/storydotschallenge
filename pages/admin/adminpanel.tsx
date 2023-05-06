@@ -15,9 +15,7 @@ export default function AdminPanel({ children }: any) {
     const router = useRouter()
 
     const [productList, setProductList] = useState<string[]>([])
-
     const [productShow, setProductShow] = useState('')
-
     const [showDetails, setShowDetails] = useState<boolean>(false)
     const [showCreate, setShowCreate] = useState<boolean>(false)
 
@@ -28,10 +26,16 @@ export default function AdminPanel({ children }: any) {
 
 
     async function getProducts() {
-        const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `admin/products?limit=10&offset=${10 * (pagination - 1)}`)
+        const token = localStorage.getItem('token')
+        const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `admin/products?limit=10&offset=${10 * (pagination - 1)}`,
+        {method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'origin',
+            'Authorization': 'Bearer ' + token
+        }
+        })
         const data = await response.json()
-        // const length = Object.fromEntries(response.headers.entries()).count
-        console.log(data)
         setProducts(data.products)
         setLenght(data.count)
     }
@@ -162,7 +166,9 @@ export default function AdminPanel({ children }: any) {
 
             <div id="application-sidebar" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 dark:scrollbar-y dark:bg-gray-800 dark:border-gray-700 z-[60] hs-overlay-backdrop-open:z-[55]">
                 <div className="px-6">
-                    <img src="https://res.cloudinary.com/dgcsnhguo/image/upload/v1683231773/storydots/logo_vsgyyw.png" />
+                    <Link href='/'>
+                        <img src="https://res.cloudinary.com/dgcsnhguo/image/upload/v1683231773/storydots/logo_vsgyyw.png" />
+                    </Link>
                 </div>
 
                 <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
@@ -252,8 +258,6 @@ export default function AdminPanel({ children }: any) {
                                                                 <Link href={`/admin/product/${element.id}`}>
                                                                     <div className="font-bold">{element.name}</div>
                                                                 </Link>
-                                                                {/* <div className="font-bold">Hart Hagerty</div>
-                                                    <div className="text-sm opacity-50">United States</div> */}
                                                             </div>
                                                         </div>
                                                     </td>

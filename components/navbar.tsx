@@ -125,6 +125,7 @@ export default function Navbar(): JSX.Element {
   const [modalOpen, setModalOpen] = useState(false)
 
   const [ loginStatus, setLoginStatus ] = useState(false)
+  const [ adminStatus, setAdminStatus ] = useState(false)
 
   const [userInfo, setUserInfo] = useState({
     first_name: '',
@@ -137,6 +138,23 @@ export default function Navbar(): JSX.Element {
 
   const router = useRouter()
 
+  async function checkAdmin(email: string) {
+    const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `admin/check`, {
+      method: 'POST',
+      body: JSON.stringify({email}),
+      headers: 
+        {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    if (data.message === 'Success') {
+      setAdminStatus(true)
+    } else {
+      setAdminStatus(false)
+    }
+  }
+
   function signOut() {
     localStorage.removeItem('first_name')
     localStorage.removeItem('last_name')
@@ -145,10 +163,6 @@ export default function Navbar(): JSX.Element {
     localStorage.removeItem('token')
     setLoginStatus(false)
   }
-
-  useEffect(() => {
-
-  }, [modalOpen])
 
   useEffect(() => {
     const first_name = localStorage.getItem('first_name')
@@ -162,6 +176,7 @@ export default function Navbar(): JSX.Element {
         avatar,
         email
       })
+      checkAdmin(email)
       setLoginStatus(true)
     }
   }, [])
@@ -466,7 +481,10 @@ export default function Navbar(): JSX.Element {
                         </div>
                     </label>
                     <div tabIndex={0} className="dropdown-content menu absolute right-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg">
-                        <div className="p-2">
+                        {
+                          adminStatus
+                          ?
+                          <div className="p-2">
                             <Link
                                 href="/admin"
                                 className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
@@ -474,6 +492,9 @@ export default function Navbar(): JSX.Element {
                                 Admin panel
                             </Link>
                         </div>
+                        :
+                        null
+                        }
 
                         <div className="p-2">
                             <button
@@ -509,7 +530,7 @@ export default function Navbar(): JSX.Element {
           </div>
         </nav>
       </header>
-      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} setLoginStatus={setLoginStatus} setUserInfo={setUserInfo}/>
+      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} setLoginStatus={setLoginStatus} setUserInfo={setUserInfo} setAdminStatus={setAdminStatus}/>
     </div>
   )
 }

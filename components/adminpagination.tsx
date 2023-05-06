@@ -10,13 +10,13 @@ export default function AdminPagination({ length, pagination, setPagination }: {
 
     if (maxIndex <= 7) {
         for (let i = maxIndex; i > 0; i--) {
-            display.unshift(<li onClick={() => setPagination(i)} className="hover:cursor-pointer m-1 border p-3" key={i}>
+            display.unshift(<li onClick={() => setPagination(i)} className={pagination ===  i ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={i}>
                     {i}
             </li>)
         }
     } else if (maxIndex > 7 && pagination < 5) {
         for (let i = 5; i > 0; i--) {
-            display.unshift(<li onClick={() => setPagination(i)} className="hover:cursor-pointer m-1 border p-3" key={i}>
+            display.unshift(<li onClick={() => setPagination(i)} className={pagination ===  i ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={i}>
                     {i}
             </li>)
         }
@@ -24,40 +24,40 @@ export default function AdminPagination({ length, pagination, setPagination }: {
             . . .
         </li>)
         display.push(
-            <li onClick={() => setPagination(maxIndex)} className="hover:cursor-pointer m-1 border p-3" key={maxIndex}>
+            <li onClick={() => setPagination(maxIndex)} className={pagination ===  maxIndex ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={maxIndex}>
                     {maxIndex}
             </li>
         )
     } else if (maxIndex > 7 && pagination >= 5 && pagination < maxIndex - 3) {
         for (let i = pagination + 1; i >= pagination - 1; i--) {
-            display.unshift(<li onClick={() => setPagination(i)} className="hover:cursor-pointer m-1 border p-3" key={i}>
+            display.unshift(<li onClick={() => setPagination(i)} className={pagination === i  ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={i}>
                     {i}
             </li>)
         }
         display.unshift(<li className="flex items-end mx-1" key={'suspense'}>
             . . .
         </li>)
-        display.unshift(<li onClick={() => setPagination(1)} className="hover:cursor-pointer m-1 border p-3" key={1}>
+        display.unshift(<li onClick={() => setPagination(1)} className={pagination ===  1 ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={1}>
                 {1}
         </li>)
         display.push(<li className="flex items-end mx-1" key={'suspense2'}>
             . . .
         </li>)
         display.push(
-            <li onClick={() => setPagination(maxIndex)} className="hover:cursor-pointer m-1 border p-3" key={maxIndex}>
+            <li onClick={() => setPagination(maxIndex)} className={pagination ===  maxIndex ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={maxIndex}>
                     {maxIndex}
             </li>
         )
     } else {
         for (let i = maxIndex; i >= maxIndex - 4; i--) {
-            display.unshift(<li onClick={() => setPagination(i)} className="hover:cursor-pointer m-1 border p-3" key={i}>
+            display.unshift(<li onClick={() => setPagination(i)} className={pagination === i  ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={i}>
                     {i}
             </li>)
         }
         display.unshift(<li className="flex items-end mx-1" key={'suspense'}>
             . . .
         </li>)
-        display.unshift(<li onClick={() => setPagination(1)} className="hover:cursor-pointer m-1 border p-3" key={1}>
+        display.unshift(<li onClick={() => setPagination(1)} className={pagination ===  1 ? "bg-slate-500 border-gray-600 hover:cursor-pointer m-1 border p-3" : "hover:cursor-pointer m-1 border p-3"} key={1}>
                 {1}
         </li>)
     }
